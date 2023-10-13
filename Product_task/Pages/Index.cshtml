@@ -1,0 +1,23 @@
+﻿@page
+@model Product_task.Pages.IndexModel
+
+<meta charset="UTF-8">
+
+<h3>Получить все продукты по категории</h3>
+<form method="get">
+    <input type="text" name="name" />
+    <input type="submit" value="Отправить" />
+</form>
+  
+
+<h3>Добавить продукт</h3>
+<form method="post">
+    <input type="text" name="nameItem" />
+    <input type="text" name="nameCategory" />
+    <input type="submit" value="Send" />
+</form>
+
+<h3>Получить все продукты</h3>
+<form method="get" action="/Index">
+    <input type="submit" value="Получить">
+</form>
