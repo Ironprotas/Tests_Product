@@ -31,26 +31,51 @@ namespace Product_task.Pages
 
         public IActionResult OnGet(string name)
         {
-            var categories = _context.Categories.Include(c => c.Items)
-                .Where(c => c.Name == name)
-                .ToList();
-
-            if (categories.Count > 0)
+            if (string.IsNullOrEmpty(name))
             {
-                var result = "<table>";
-                foreach (var category in categories)
+                return Page();
+            }
+            else if (name == "Продукты")
+            {
+                var categories = _context.Categories.Include(c => c.Items).ToList();
+                if (categories.Count > 0)
                 {
-                    foreach (var item in category.Items)
+                    var result = "<table>";
+                    foreach (var category in categories)
                     {
-                        result += $"<tr><td>{category.Name}</td><td>{item.Name}</td></tr>";
+                        foreach (var item in category.Items)
+                        {
+                            result += $"<tr><td>{category.Name}</td><td>{item.Name}</td></tr>";
+                        }
                     }
+                    result += "</table>";
+                    return Content(result, "text/html; charset=UTF-8");
                 }
-                result += "</table>";
-                return Content(result, "text/html; charset=UTF-8");
+            }
+            else
+            {
+                var categories = _context.Categories.Include(c => c.Items)
+                    .Where(c => c.Name == name)
+                    .ToList();
+
+                if (categories.Count > 0)
+                {
+                    var result = "<table>";
+                    foreach (var category in categories)
+                    {
+                        foreach (var item in category.Items)
+                        {
+                            result += $"<tr><td>{category.Name}</td><td>{item.Name}</td></tr>";
+                        }
+                    }
+                    result += "</table>";
+                    return Content(result, "text/html; charset=UTF-8");
+                }
             }
 
             return Page();
         }
+
 
 
 

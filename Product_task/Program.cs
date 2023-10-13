@@ -31,11 +31,6 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.MapGet("/Index", (HttpContext context) =>
-{
-    context.Response.Redirect("/AllGet"); // Переход на страницу с параметром.
-    return Task.CompletedTask;
-});
 
 app.UseAuthorization();
 
